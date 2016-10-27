@@ -9,30 +9,26 @@ import java.net.Socket;
 public abstract class AbstractServer {
 
 	public void runServer(int port){
+		
 		ServerSocket welcomeSocket = null;
+		WorkerRunnable runner = null;
 		
 		try {
+			System.out.println("Port by constructor: " + port);
 			welcomeSocket = new ServerSocket(port);
 			welcomeSocket.setSoTimeout(60 * 1000);
+			
+			System.out.println("Port by 'welcomeSocket': " + welcomeSocket.getLocalPort());
 			
 			while (true) {    
 				// Create the Client Socket.
 				Socket clientSocket = welcomeSocket.accept();
 				System.out.println("Client-socket established...");
 				
-				// Create input and output streams to client
-				ObjectOutputStream outToClient = new ObjectOutputStream(clientSocket.getOutputStream());
-				ObjectInputStream inFromClient = new ObjectInputStream(clientSocket.getInputStream());
-
-				// Create Message object and retrieve information.
-				Message<?> inMsg = (Message<?>) inFromClient.readObject();
-
-				// Do something with the Message object.
-				Message<?> outMsg = null;
-				outMsg = processMessage(inMsg);
-
-				// Send the modified Message object back.
-				outToClient.writeObject(outMsg);        
+				/*
+				 * From here on, Runnable handles the job.
+				 */
+				this.startThread(clientSocket);
 			}
 
 		} catch (Exception e) {
@@ -51,5 +47,5 @@ public abstract class AbstractServer {
 		}
 	}
 	
-	public abstract Message<?> processMessage(Message<?> m);
+	protected abstract void startThread(Socket clientSocket);
 }

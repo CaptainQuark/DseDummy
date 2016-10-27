@@ -1,5 +1,5 @@
 package helper;
 
-public enum TAG {
+public enum Tag {
 	REQ_DEBUG
 }

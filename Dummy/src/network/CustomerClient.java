@@ -1,13 +1,13 @@
 package network;
 
-import helper.TAG;
+import helper.Tag;
 import main.Data;
 
 public class CustomerClient extends Client {
 
 	public static void main(String args[]){
 		
-		Message<String> message = new Message<>(TAG.REQ_DEBUG, "Debug from Client!");
+		Message<String> message = new Message<>(Tag.REQ_DEBUG, "Debug from Client!");
 		Message<?> returnMessage = null;
 		
 		CustomerClient client = new CustomerClient();

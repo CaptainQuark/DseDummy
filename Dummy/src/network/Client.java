@@ -10,7 +10,7 @@ public class Client {
 	    try {
 	        // Create the socket.
 	        Socket clientSocket = new Socket(host, port);
-	        System.out.println("Socket created.");
+	        System.out.println("Socket by client created.");
 	        
 	        // Create the input & output streams to the server.
 	        ObjectOutputStream outToServer = new ObjectOutputStream(clientSocket.getOutputStream());

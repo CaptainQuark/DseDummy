@@ -1,6 +1,6 @@
 package network;
 
-import helper.TAG;
+import java.net.Socket;
 
 public class CostumerRequestServer extends AbstractServer {
 
@@ -11,16 +11,10 @@ public class CostumerRequestServer extends AbstractServer {
 	}
 
 	@Override
-	public Message<?> processMessage(Message<?> m) {
-
-		/*
-		 * Check request tag of message and operate correspondingly.
-		 */
-		if(m.getTag().equals(TAG.REQ_DEBUG)){
-			Client c = new Client();
-			return c.runClient("localhost", 5001, new Message<String>(TAG.REQ_DEBUG, "Requesting data object."));
-		}
-		
-		return null;
+	protected void startThread(Socket clientSocket) {
+        new Thread(
+                new CostumerRequestServerWorkerRunnable(
+                    clientSocket)
+            ).start();		
 	}
 }

@@ -1,6 +1,6 @@
 package network;
 
-import helper.TAG;
+import helper.Tag;
 
 /**
  * Class to carry information through the network.
@@ -10,9 +10,9 @@ import helper.TAG;
  */
 public class Message<T> implements java.io.Serializable{
 	protected final T t;
-	protected final TAG REQ_TAG;
+	protected final Tag REQ_TAG;
 	
-	public Message(TAG tag, T t){ 
+	public Message(Tag tag, T t){ 
 		this.t = t; 
 		this.REQ_TAG = tag;
 	}
@@ -21,5 +21,5 @@ public class Message<T> implements java.io.Serializable{
 	 * Getters.
 	 */
 	public T getType(){ return t; }
-	public TAG getTag(){ return this.REQ_TAG; }
+	public Tag getTag(){ return this.REQ_TAG; }
 }
